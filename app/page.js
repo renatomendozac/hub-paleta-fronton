@@ -38,7 +38,7 @@ export default function Home () {
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
       <h1>Hub - Videos de paleta fronton</h1>
 
-      <ul className='grid grid-cols-3 gap-4'>
+      <ul className='grid grid-cols-1 gap-4 box-border list-none my-8 sm:grid-cols-2  md:grid-cols-3'>
         {
           content.map(({ title, id }) => (
             <li key={id}>
