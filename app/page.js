@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function Home () {
   const { data: matches } = await supabase
@@ -7,14 +8,28 @@ export default async function Home () {
     .select('*')
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      <h1 className='text-center'>Hub - Videos de paleta fronton</h1>
+    <main className="min-h-screen p-12">
+      <header className='flex-col flex justify-between mb-8 gap-4 sm:items-center sm:flex-row'>
+        <div className='flex items-center gap-4'>
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={64}
+              height={64}
+              priority
+            />
+          </Link>
+          <h1 className='text-2xl'>Partidos de paleta frontón</h1>
+        </div>
+        <Link className='text-right' href="/contributing">Contribuir</Link>
+      </header>
 
-      <ul className='grid grid-cols-1 gap-4 box-border list-none my-8 sm:grid-cols-2 md:grid-cols-3 items-end'>
+      <ul className='grid grid-cols-1 gap-4 list-none sm:grid-cols-2 md:grid-cols-3 items-end'>
         {
           matches.map(({ title, link }) => (
             <li key={link}>
-              <h1>{title}</h1>
+              <h1 className='mb-2'>{title}</h1>
               <Image
                 priority
                 alt={title}
