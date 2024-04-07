@@ -17,4 +17,12 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  min-height: 100vh;
+  padding: 32px;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: 48px;
+  }
 }
