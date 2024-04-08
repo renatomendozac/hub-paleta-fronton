@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { getThumbnail } from '@/utils/get-thumbnail'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -8,18 +9,18 @@ export default async function Home () {
     .select('*')
 
   return (
-    <ul className='grid grid-cols-1 gap-5 list-none sm:grid-cols-2 md:grid-cols-3 items-end'>
+    <ul className='grid grid-cols-1 gap-6 list-none sm:grid-cols-2 md:grid-cols-3 items-end'>
       {
-        matches.map(({ id, title, link }) => (
+        matches.map(({ id, title, platform, link }) => (
           <li key={id}>
-            <h1 className='mb-2'>{title}</h1>
+            <h1 className='mb-4'>{title}</h1>
             <Link href={`/match/${id}`}>
               <Image
                 priority
                 alt={title}
-                src={`https://img.youtube.com/vi/${link}/0.jpg`}
-                width={500}
-                height={500}
+                src={getThumbnail(link, platform)}
+                width={512}
+                height={512}
               />
             </Link>
           </li>

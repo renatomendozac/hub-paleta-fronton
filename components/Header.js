@@ -15,7 +15,7 @@ const Header = () => (
       </Link>
       <h1 className='text-2xl'>Partidos de paleta frontón</h1>
     </div>
-    <Link className='text-right' href="/contributing">Contribuir</Link>
+    <Link className='underline underline-offset-8 text-right' href="/contributing">Contribuir</Link>
   </header>
 )
 
