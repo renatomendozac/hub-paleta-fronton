@@ -1,5 +1,6 @@
 import Tag from '@/components/Tag'
 import { supabase } from '@/lib/supabase'
+import { getVideoUrl } from '@/utils/get-video-url'
 
 const Match = async ({ params }) => {
   const { data: matches } = await supabase
@@ -11,7 +12,7 @@ const Match = async ({ params }) => {
     return <main>No se ha encontrado el partido.</main>
   }
 
-  const [{ title, link, tags }] = matches
+  const [{ title, link, tags, platform }] = matches
 
   return (
     <>
@@ -19,7 +20,7 @@ const Match = async ({ params }) => {
 
       <div className='relative w-full pb-[56.25%] overflow-hidden'>
         <iframe
-          src={`https://www.youtube.com/embed/${link}`}
+          src={getVideoUrl(link, platform)}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
