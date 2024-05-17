@@ -26,3 +26,13 @@ body {
     padding: 48px;
   }
 }
+
+.alert-translate {
+  animation: alert-translate .5s forwards;
+}
+
+@keyframes alert-translate {
+  100% {
+    transform: translateY(80px);
+  }
+}
