@@ -1,18 +1,29 @@
-import Tag from '@/components/Tag'
 import { supabase } from '@/lib/supabase'
 import { getVideoUrl } from '@/utils/get-video-url'
+import PageTags from './page-tags'
+import WithoutResults from '@/components/WithoutResults'
 
 const Match = async ({ params }) => {
   const { data: matches } = await supabase
     .from('match')
-    .select('*')
+    .select('title, link, tags, platform, players, category (acronym), competition (id, city, name, is_tcn, points, start_date, end_date)')
     .eq('id', params.id)
 
   if (!(matches && matches.length)) {
-    return <main>No se ha encontrado el partido.</main>
+    return <WithoutResults title="¡No se ha encontrado el partido!" />
   }
 
-  const [{ title, link, tags, platform }] = matches
+  const [{
+    title,
+    link,
+    tags,
+    platform,
+    players: playersId,
+    category: { acronym: categoryAcronym },
+    competition: { name: competitionName, is_tcn: isTcn }
+  }] = matches
+
+  const { data: players } = await supabase.from('player').select('id, full_name').in('id', playersId)
 
   return (
     <>
@@ -29,9 +40,13 @@ const Match = async ({ params }) => {
         />
       </div>
 
-      <div className='mt-6'>
-        {tags.map(label => <Tag key={label} label={label} />)}
-      </div>
+      <PageTags
+        categoryAcronym={categoryAcronym}
+        competition={competitionName}
+        isTcn={isTcn}
+        players={players}
+        tags={tags}
+      />
     </>
   )
 }
