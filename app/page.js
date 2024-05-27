@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default async function Home () {
   const { data: matches } = await supabase
     .from('match')
-    .select('*')
+    .select('id, title, platform, link')
 
   return (
     <ul className='grid grid-cols-1 gap-6 list-none sm:grid-cols-2 md:grid-cols-3 items-end'>
