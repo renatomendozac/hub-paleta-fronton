@@ -36,7 +36,7 @@ const Match = async ({ params }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
-          className='absolute top-0 left-0 w-full h-full'
+          className='absolute top-0 left-0 w-full h-full overflow-hidden border-none'
         />
       </div>
 

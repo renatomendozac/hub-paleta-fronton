@@ -4,5 +4,9 @@ export const getThumbnail = (videoId, platform) => {
     return `https://graph.facebook.com/${videoId}/picture?access_token=${accessToken}`
   }
 
-  return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+  if (platform === 'youtube') {
+    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+  }
+
+  return '/image-not-available.png'
 }

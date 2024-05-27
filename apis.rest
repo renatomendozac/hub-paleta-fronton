@@ -1,0 +1,1 @@
+GET https://graph.facebook.com/v19.0/<videoId>/thumbnails?access_token=<accessToken>
