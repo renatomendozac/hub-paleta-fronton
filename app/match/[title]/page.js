@@ -4,32 +4,39 @@ import PageTags from './page-tags'
 import WithoutResults from '@/components/WithoutResults'
 
 const Match = async ({ params }) => {
+  const decodedTitle = decodeURIComponent(params.title)
   const { data: matches } = await supabase
     .from('match')
-    .select('title, link, tags, platform, players, category (acronym), competition (id, city, name, is_tcn, points, start_date, end_date)')
-    .eq('id', params.id)
+    .select('title, link, tags, platform, players, category (acronym, is_single), competition (id, city, name, is_tcn, points, start_date, end_date)')
+    .eq('title', decodedTitle)
 
   if (!(matches && matches.length)) {
     return <WithoutResults title="¡No se ha encontrado el partido!" />
   }
 
   const [{
-    title,
     link,
     tags,
     platform,
     players: playersId,
-    category: { acronym: categoryAcronym },
+    category: { acronym: categoryAcronym, is_single: isSingle },
     competition: { name: competitionName, is_tcn: isTcn }
   }] = matches
 
   const { data: players } = await supabase.from('player').select('id, full_name').in('id', playersId)
+  const playersName = players.map(({ full_name: fullName }) => fullName)
+  const firstTeam = isSingle ? playersName.slice(0, 1) : playersName.slice(0, 2)
+  const secondTeam = isSingle ? playersName.slice(1) : playersName.slice(2)
+  const names = `${firstTeam.join('&')} vs ${secondTeam.join('&')}`
 
   return (
     <>
-      <h1 className='mb-6'>{title}</h1>
+      <h1 className='text-xl font-bold text-center mb-6'>
+        {names}<br />
+        {competitionName}
+      </h1>
 
-      <div className='max-w-[768px]'>
+      <div className='max-w-[768px] m-auto'>
         <div className='relative h-0 pb-[56.25%] overflow-hidden'>
           <iframe
             src={getVideoUrl(link, platform)}

@@ -10,7 +10,7 @@ const ListMatches = ({ matches }) => (
         matches.map(({ id, title, platform, link }) => (
           <li key={id}>
             <h1 className='mb-4'>{title}</h1>
-            <Link href={`/match/${id}`}>
+            <Link href={`/match/${title}`}>
               <Image
                 priority
                 alt={title}

@@ -16,7 +16,7 @@ const PageTags = ({ tags, isTcn, competition, categoryAcronym, players }) => {
   ].filter(Boolean)
 
   return (
-    <div className='mt-6 flex flex-wrap'>
+    <div className='mt-6 flex flex-wrap justify-center'>
       {fullTags.map(({ type, label }) => (
         <Tag
           key={`${type}-${label}`}
