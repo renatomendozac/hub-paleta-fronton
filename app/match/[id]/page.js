@@ -29,15 +29,17 @@ const Match = async ({ params }) => {
     <>
       <h1 className='mb-6'>{title}</h1>
 
-      <div className='relative w-full pb-[56.25%] overflow-hidden'>
-        <iframe
-          src={getVideoUrl(link, platform)}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-          className='absolute top-0 left-0 w-full h-full'
-        />
+      <div className='max-w-[768px]'>
+        <div className='relative h-0 pb-[56.25%] overflow-hidden'>
+          <iframe
+            src={getVideoUrl(link, platform)}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className='absolute top-0 left-0 w-full h-full'
+          />
+        </div>
       </div>
 
       <PageTags
