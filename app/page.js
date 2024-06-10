@@ -5,6 +5,7 @@ export default async function Home () {
   const { data: matches } = await supabase
     .from('match')
     .select(matchFields)
+    .eq('is_visible', true)
 
   return <ListMatches matches={matches} />
 }
