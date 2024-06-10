@@ -29,7 +29,7 @@ const Match = async ({ params }) => {
   const playersName = players.map(({ full_name: fullName }) => fullName)
   const firstTeam = isSingle ? playersName.slice(0, 1) : playersName.slice(0, 2)
   const secondTeam = isSingle ? playersName.slice(1) : playersName.slice(2)
-  const names = `${firstTeam.join('&')} vs ${secondTeam.join('&')}`
+  const names = `${firstTeam.join(' & ')} vs ${secondTeam.join(' & ')}`
 
   return (
     <>
