@@ -276,7 +276,6 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
           type='date'
           defaultValue={getCurrentDate()}
           onChange={handleDate}
-          error={errors.url}
           additionalInformation="DD/MM/YYYY. Ej: 28/02/2024"
         />
 
