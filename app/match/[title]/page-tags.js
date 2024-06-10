@@ -21,7 +21,7 @@ const PageTags = ({ tags, isTcn, competition, categoryAcronym, players }) => {
         <Tag
           key={`${type}-${label}`}
           label={label}
-          onClick={() => router.push(`/${type}/${label}`, 'push')}
+          onClick={() => router.push(`/${type}/${label}`)}
         />)
       )}
     </div>

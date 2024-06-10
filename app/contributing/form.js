@@ -16,6 +16,9 @@ import { supabase } from '@/lib/supabase'
 import TagsForm from './TagsForm'
 import { handleError } from '@/utils/handle-error'
 import useAlert from '@/hooks/useAlert'
+import Link from 'next/link'
+import Modal from '@/components/Modal'
+import { useRouter } from 'next/navigation'
 
 const getCompetitionId = async (competitionName, competitions = []) => {
   const index = competitions.findIndex(({ name }) => name === competitionName)
@@ -88,7 +91,11 @@ const getPlayersName = ({ first, second, third, fourth }) => {
 }
 
 const Form = ({ competitions = [], categories = [], players = [] }) => {
+  const router = useRouter()
   const [errors, setErrors] = useState({})
+  const [disabled, setDisabled] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [urlNewMatch, setUrlNewMatch] = useState(null)
   const [formValues, formDispatch] = useReducer(formReducer, formInitialValues)
   const videoUrl = useDebounce(formValues.url, delay)
   const { open: openAlert, holder } = useAlert()
@@ -130,6 +137,8 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
       return
     }
 
+    setDisabled(true)
+
     try {
       const newMatch = {
         title: [getPlayersName(formValues.players), formValues.competition].join(' | '),
@@ -142,7 +151,7 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
         tags: formValues.tags
       }
 
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from('match')
         .insert([newMatch])
         .select()
@@ -152,7 +161,13 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
       }
 
       openAlert({ content: 'Se registro con exito.', type: 'success' })
+
+      const [match] = data
+      setUrlNewMatch(`/match/${match.title}`)
+      setIsVisible(true)
     } catch (error) {
+      setDisabled(false)
+
       openAlert({
         content: handleError(error),
         type: 'error'
@@ -206,9 +221,22 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formValues.modality, formValues.gender])
 
+  const secondaryButtonText = 'Ver match'
+
   return (
     <div>
-      <h1 className='mb-6 text-center'>Registrar un match</h1>
+      <Modal
+        title="Registro exitoso ✅"
+        primaryButtonText="Registrar nuevo match"
+        primaryButtonAction={() => router.push('/refresh?to=/contributing')}
+        secondaryButtonText={secondaryButtonText}
+        secondaryButtonAction={() => router.push(urlNewMatch)}
+        isVisible={isVisible}
+      >
+        El match ha sido registrado con éxito. Agracedemos tu contribución a la comunidad ✨. <br />
+        En las proximas horas será revisado antes de hacerse público, sin embargo, si deseas ver el juego presiona en {`"${secondaryButtonText}"`}.
+      </Modal>
+      <h1 className='text-xl font-bold text-center mb-6'>Registrar un match</h1>
 
       <form className="w-full max-w-xl m-auto">
         <AutoComplete
@@ -292,9 +320,21 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
 
         <TagsForm tags={formValues.tags} handleTags={handleTags} />
 
-        <Button onClick={submit}>
+        <Button onClick={submit} disabled={disabled}>
           Registrar
         </Button>
+
+        <div className="md:flex md:items-center mb-4">
+          <div className="md:w-1/3" />
+          <div className="md:w-2/3 text-xs mt-4">
+            <span className='text-gray-600 italic mt-1 break-words'>
+              Los partidos registrados deben ser revisados antes de hacerse publico.{' '}
+            </span>
+            <Link className='underline underline-offset-8 mt-1 text-white' href="/pending">
+              Ver pendientes de aprobación.
+            </Link>
+          </div>
+        </div>
       </form>
 
       {holder}
