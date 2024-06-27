@@ -2,10 +2,13 @@ import ListMatches, { matchFields } from '@/components/ListMatches'
 import WithoutResults from '@/components/WithoutResults'
 import { getListMatches } from '@/services/get-list-matches'
 
+export const revalidate = 0
+
 export default async function Home ({ params }) {
   const { type, label } = params
   const decodedLabel = decodeURIComponent(label)
-  const matches = await getListMatches({ type, label: decodedLabel }, matchFields)
+  const getListMatchesArgs = [{ type, label: decodedLabel }, matchFields]
+  const matches = await getListMatches(...getListMatchesArgs)
 
   const hasResults = matches && matches.length > 0
   if (!hasResults) {

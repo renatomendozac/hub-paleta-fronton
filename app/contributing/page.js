@@ -1,6 +1,8 @@
 import { supabase } from '@/lib/supabase'
 import Form from './form'
 
+export const revalidate = 0
+
 const Contributing = async () => {
   const { data: competitions } = await supabase
     .from('competition')
