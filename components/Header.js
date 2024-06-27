@@ -19,7 +19,12 @@ const Header = () => (
     <div className='flex items-center gap-3'>
       <Link className='underline underline-offset-8 text-right' href="/contributing">Contribuir</Link>
       .
-      <Link className='underline underline-offset-8 text-right' href="https://www.instagram.com/hub.paletafronton/">
+      <Link
+        className='underline underline-offset-8 text-right'
+        href="https://www.instagram.com/hub.paletafronton/"
+        target="_blank"
+        rel="noopener nofollow"
+      >
         <InstagramIcon className="text-main" />
       </Link>
     </div>
