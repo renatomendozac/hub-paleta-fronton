@@ -7,8 +7,7 @@ export const revalidate = 0
 export default async function Home ({ params }) {
   const { type, label } = params
   const decodedLabel = decodeURIComponent(label)
-  const getListMatchesArgs = [{ type, label: decodedLabel }, matchFields]
-  const matches = await getListMatches(...getListMatchesArgs)
+  const matches = await getListMatches({ type, label: decodedLabel }, matchFields)
 
   const hasResults = matches && matches.length > 0
   if (!hasResults) {
