@@ -1,11 +1,9 @@
 import ListMatches, { matchFields } from '@/components/ListMatches'
-import { supabase } from '@/lib/supabase'
+import { FilterBy } from '@/utils/filter-by'
+import { getListMatches } from '@/services/get-list-matches'
 
 export default async function Home () {
-  const { data: matches } = await supabase
-    .from('match')
-    .select(matchFields)
-    .eq('is_visible', true)
+  const matches = await getListMatches({ type: FilterBy.Visible }, matchFields)
 
   return <ListMatches matches={matches} />
 }
