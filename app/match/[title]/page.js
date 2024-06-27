@@ -4,6 +4,8 @@ import PageTags from './page-tags'
 import WithoutResults from '@/components/WithoutResults'
 import Message from '@/components/Message'
 
+export const revalidate = 0
+
 const Match = async ({ params }) => {
   const decodedTitle = decodeURIComponent(params.title)
   const { data: matches } = await supabase
