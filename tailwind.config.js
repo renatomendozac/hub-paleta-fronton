@@ -8,10 +8,12 @@ module.exports = {
   theme: {
     extend: {
       textColor: {
-        main: 'rgb(var(--background-rgb))'
+        main: 'rgb(var(--foreground-rgb))',
+        secondary: 'rgb(var(--background-rgb))'
       },
       backgroundColor: {
-        main: 'rgb(var(--foreground-rgb))'
+        main: 'rgb(var(--background-rgb))',
+        secondary: 'rgb(var(--foreground-rgb))'
       }
     }
   },

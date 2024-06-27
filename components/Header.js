@@ -1,3 +1,4 @@
+import InstagramIcon from '@/icons/InstagramIcon'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,7 +16,13 @@ const Header = () => (
       </Link>
       <h1 className='text-2xl'>Partidos de paleta frontón</h1>
     </div>
-    <Link className='underline underline-offset-8 text-right' href="/contributing">Contribuir</Link>
+    <div className='flex items-center gap-3'>
+      <Link className='underline underline-offset-8 text-right' href="/contributing">Contribuir</Link>
+      .
+      <Link className='underline underline-offset-8 text-right' href="https://www.instagram.com/hub.paletafronton/">
+        <InstagramIcon className="text-main" />
+      </Link>
+    </div>
   </header>
 )
 
