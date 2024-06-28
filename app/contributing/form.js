@@ -74,11 +74,9 @@ const getPlayersId = async ({ first, second, third, fourth }, players = []) => {
 }
 
 const getPlayersName = ({ first, second, third, fourth }) => {
-  const getNames = (name = '') => name.split(' ').slice(0, 2).join(' ')
-
-  const results = [getNames(first), getNames(second)]
+  const results = [first, second]
   if (third && fourth) {
-    results.push(getNames(third), getNames(fourth))
+    results.push(third, fourth)
   }
 
   if (results.length === 4) {
