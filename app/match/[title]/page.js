@@ -3,13 +3,15 @@ import { getVideoUrl } from '@/utils/get-video-url'
 import PageTags from './page-tags'
 import WithoutResults from '@/components/WithoutResults'
 
+const formatDate = new Intl.DateTimeFormat('es-ES', { dateStyle: 'medium' }).format
+
 export const revalidate = 0
 
 const Match = async ({ params }) => {
   const decodedTitle = decodeURIComponent(params.title)
   const { data: matches } = await supabase
     .from('match')
-    .select('title, link, tags, platform, players, category (acronym, is_single), competition (id, city, name, is_tcn, points, start_date, end_date)')
+    .select('title, date, link, tags, platform, players, category (acronym, is_single), competition (id, city, name, is_tcn, points, start_date, end_date)')
     .eq('title', decodedTitle)
 
   if (!(matches && matches.length)) {
@@ -18,6 +20,7 @@ const Match = async ({ params }) => {
 
   const [{
     link,
+    date,
     tags,
     platform,
     players: playersId,
@@ -36,6 +39,8 @@ const Match = async ({ params }) => {
       <h1 className='text-xl font-bold text-center mb-6'>
         {names}<br />
         {competitionName}
+
+        <span className='block font-normal mt-2 text-sm'>{formatDate(new Date(date))}</span>
       </h1>
 
       <div className='max-w-[768px] m-auto'>
