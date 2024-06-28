@@ -16,7 +16,7 @@ export const getVideoIdFromUrl = (url) => {
 
     if (videoURL.host.includes('facebook') && videoURL.pathname.includes('/videos/')) {
       const [, videoId] = videoURL.pathname.split('/videos/')
-      data.videoId = videoId
+      data.videoId = videoId.split('/')[0]
       data.platform = 'facebook'
     }
 
