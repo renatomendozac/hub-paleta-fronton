@@ -29,7 +29,7 @@ const Match = async ({ params }) => {
   }] = matches
 
   const { data: players } = await supabase.from('player').select('id, full_name').in('id', playersId)
-  const playersName = players.map(({ full_name: fullName }) => fullName)
+  const playersName = playersId.map((playerId) => players.find(({ id }) => id === playerId).full_name)
   const firstTeam = isSingle ? playersName.slice(0, 1) : playersName.slice(0, 2)
   const secondTeam = isSingle ? playersName.slice(1) : playersName.slice(2)
   const names = `${firstTeam.join(' & ')} vs ${secondTeam.join(' & ')}`
