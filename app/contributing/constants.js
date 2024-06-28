@@ -1,6 +1,8 @@
 const selectorDefaultValue = -1
 const delay = 750
 
+const genericTime = 'T12:00+00:00'
+
 const getCurrentDate = () => {
   const date = new Date()
   const MMDDYYYY = new Intl.DateTimeFormat('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(date)
@@ -44,6 +46,7 @@ const ErrorMessages = {
 
 export {
   delay,
+  genericTime,
   getCurrentDate,
   selectorDefaultValue,
   modalityOptions,

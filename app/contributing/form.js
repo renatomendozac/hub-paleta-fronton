@@ -5,7 +5,7 @@ import RadioGroup from '@/components/RadioGroup'
 import Select from '@/components/Select'
 import { useEffect, useMemo, useReducer, useState } from 'react'
 import { TypesOfAction, formInitialValues, formReducer } from './reducer'
-import { ErrorMessages, checkIfIsDouble, checkIfIsSingle, delay, genderOptions, getCurrentDate, getNumberOfPlayers, modalityOptions, selectorDefaultValue } from './constants'
+import { ErrorMessages, checkIfIsDouble, checkIfIsSingle, delay, genderOptions, genericTime, getCurrentDate, getNumberOfPlayers, modalityOptions, selectorDefaultValue } from './constants'
 import Button from '@/components/Button'
 import useDebounce from '@/hooks/useDebounce'
 import { getVideoIdFromUrl } from '@/utils/get-video-id-from-url'
@@ -26,12 +26,14 @@ const getCompetitionId = async (competitionName, competitions = []) => {
     return competitions[index].id
   }
 
+  const competitionDate = `${getCurrentDate()}${genericTime}`
+
   const newCompetition = {
     name: competitionName,
     points: 0,
     is_tcn: false,
-    start_date: new Date().toISOString(),
-    end_date: new Date().toISOString()
+    start_date: new Date(competitionDate).toISOString(),
+    end_date: new Date(competitionDate).toISOString()
   }
 
   const { data, error } = await supabase
@@ -145,7 +147,7 @@ const Form = ({ competitions = [], categories = [], players = [] }) => {
         category: formValues.category,
         competition: await getCompetitionId(formValues.competition, competitions),
         players: await getPlayersId(formValues.players, players),
-        date: formValues.date,
+        date: new Date(`${formValues.date}${genericTime}`).toISOString(),
         tags: formValues.tags
       }
 
