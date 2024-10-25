@@ -1,4 +1,6 @@
+import FacebookIcon from '@/icons/FacebookIcon'
 import InstagramIcon from '@/icons/InstagramIcon'
+import { SocialMediaLinks } from '@/utils/social-media-links'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -21,11 +23,29 @@ const Header = () => (
       .
       <Link
         className='underline underline-offset-8 text-right'
-        href="https://www.instagram.com/hub.paletafronton/"
+        href={SocialMediaLinks.Facebook}
+        target="_blank"
+        rel="noopener nofollow"
+      >
+        <FacebookIcon className="text-main" />
+      </Link>
+      .
+      <Link
+        className='underline underline-offset-8 text-right'
+        href={SocialMediaLinks.Instagram}
         target="_blank"
         rel="noopener nofollow"
       >
         <InstagramIcon className="text-main" />
+      </Link>
+      .
+      <Link
+        className='underline underline-offset-8 text-right'
+        href="/suggestions"
+        target="_blank"
+        rel="noopener nofollow"
+      >
+        Sugerencias
       </Link>
     </div>
   </header>
