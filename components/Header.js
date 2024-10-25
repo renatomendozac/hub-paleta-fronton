@@ -19,8 +19,6 @@ const Header = () => (
       <h1 className='text-2xl'>Partidos de paleta frontón</h1>
     </div>
     <div className='flex items-center gap-3'>
-      <Link className='underline underline-offset-8 text-right' href="/contributing">Contribuir</Link>
-      .
       <Link
         className='underline underline-offset-8 text-right'
         href={SocialMediaLinks.Facebook}
