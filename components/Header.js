@@ -40,8 +40,6 @@ const Header = () => (
       <Link
         className='underline underline-offset-8 text-right'
         href="/suggestions"
-        target="_blank"
-        rel="noopener nofollow"
       >
         Sugerencias
       </Link>
