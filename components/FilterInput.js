@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import FilterOffIcon from '@/icons/FilterOff'
 import FilterOnIcon from '@/icons/FilterOn'
-import { getListCompetitions } from '@/services/get-competition-by-acronym'
+import { getListCompetitions } from '@/services/competition'
 import { getListPlayers } from '@/services/player'
 import { getListCategory } from '@/services/category'
 import Divider from './Divider'

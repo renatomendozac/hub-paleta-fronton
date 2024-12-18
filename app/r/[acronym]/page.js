@@ -1,4 +1,4 @@
-import { getCompetitionByAcronym } from '@/services/get-competition-by-acronym'
+import { getCompetitionByAcronym } from '@/services/competition'
 import { redirect } from 'next/navigation'
 
 export const revalidate = 0

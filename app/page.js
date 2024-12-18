@@ -1,6 +1,6 @@
 import ListMatches, { matchFields } from '@/components/ListMatches'
 import { FilterBy } from '@/utils/filter-by'
-import { getListMatches } from '@/services/get-list-matches'
+import { getListMatches } from '@/services/match'
 
 export const revalidate = 0
 
