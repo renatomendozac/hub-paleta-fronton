@@ -10,10 +10,11 @@ const Header = () => (
       <Link href="/">
         <Image
           src="/logo.svg"
+          blurDataURL="/logo.svg"
           alt="Logo"
           width={64}
           height={64}
-          priority
+          placeholder="blur"
         />
       </Link>
       <h1 className='text-2xl'>Partidos de paleta frontón</h1>
